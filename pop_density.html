@@ -98,6 +98,105 @@
             }
         );
 
+        async function geojsonFetch() {
+            let response = await fetch('assets/stateData.geojson');
+            let stateData = await response.json();
+
+            map.on('load', function loadingData() {
+                map.addSource('stateData', {
+                    type: 'geojson',
+                    data: stateData
+                });
+
+                map.addLayer({
+                    'id': 'stateData-layer',
+                    'type': 'fill',
+                    'source': 'stateData',
+                    'paint': {
+                        'fill-color': [
+                            'step',
+                            ['get', 'density'],
+
+                            '#FFEDA0',
+                            10,
+
+                            '#FED976',
+                            20,
+
+                            '#FEB24C',
+                            50,
+
+                            '#FD8D3C',
+                            100,
+
+                            '#FC4E2A',
+                            200,
+
+                            '#E31A1C',
+                            500,
+
+                            '#BD0026',
+                            1000,
+
+                            '#800026'
+                        ],
+                        'fill-outline-color': '#BBBBBB',
+                        'fill-opacity': 0.7,
+                    }
+                });
+
+                const layers = [
+                    '0-9',
+                    '10-19',
+                    '20-49',
+                    '50-100',
+                    '100-199',
+                    '200-499',
+                    '500-999',
+                    '1000 and more'
+                ];
+
+                const colors = [
+                    '#FFEDA070',
+                    '#FED97670',
+                    '#FEB24C70',
+                    '#FD8D3C70',
+                    '#FC4E2A70',
+                    '#E31A1C70',
+                    '#BD002670',
+                    '#80002670',
+                ];
+
+                const legend = document.getElementById('legend');
+                legned.innerHTML = "<b>Population Density<br>(people/sq.mi.)</b><br><br>";
+
+                layer.forEach((layer, i) => {
+                    const color = colors[i];
+                    const item = document.creatElement('div');
+                    const key = document.createElement('span');
+                    key.className = 'legend-key';
+                    key.style.backgroundColor = color;
+
+                    const value = document.createElement('span');
+                    value.innerHTML = `${layer}`;
+                    item.appendChild(key);
+                    item.appendChild(value);
+                    legend.appendChild(item);
+                });
+
+
+
+
+
+
+
+            });
+
+        };
+
+        geojsonFetch();
+
+
 
     </script>
 
