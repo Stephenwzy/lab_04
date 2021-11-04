@@ -164,15 +164,15 @@
                     '#FC4E2A70',
                     '#E31A1C70',
                     '#BD002670',
-                    '#80002670',
+                    '#80002670'
                 ];
 
                 const legend = document.getElementById('legend');
-                legned.innerHTML = "<b>Population Density<br>(people/sq.mi.)</b><br><br>";
+                legend.innerHTML = "<b>Population Density<br>(people/sq.mi.)</b><br><br>";
 
-                layer.forEach((layer, i) => {
+                layers.forEach((layer, i) => {
                     const color = colors[i];
-                    const item = document.creatElement('div');
+                    const item = document.createElement('div');
                     const key = document.createElement('span');
                     key.className = 'legend-key';
                     key.style.backgroundColor = color;
@@ -184,12 +184,15 @@
                     legend.appendChild(item);
                 });
 
-
-
-
-
-
-
+                map.on('mousemove', ({point}) => {
+                    const states = map.queryRenderedFeatures(point, {
+                        layers: ['stateData-layer']
+                    });
+                    document.getElementById('text-escription').innerHTML = states.length ?
+                        `<h3>${states[0].properties.name}</h3><p><strong><em>${states[0].properties.density}</strong> people per square mile</em></p>` :
+                        `<p>Hover over a state!</p>`;
+                });
+                        
             });
 
         };
