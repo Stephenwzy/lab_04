@@ -4,12 +4,12 @@
 <head>
     <meta charset="utf-8">
     <title>Interactive Web Mapping</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
     <style>
 
-        h2, h3 {
+        h2,h3 {
             margin: 10px;
             font-size: 18px;
         }
@@ -29,6 +29,7 @@
             left: 0;
             right: 0;
             width: 100%;
+            height: 100%;
         }
 
         .map-overlay {
@@ -61,7 +62,7 @@
             width: 150px;
         }
 
-        .legend-kay {
+        .legend-key {
             display: inline-block;
             border-radius: 20%;
             width: 10px;
@@ -116,28 +117,20 @@
                         'fill-color': [
                             'step',
                             ['get', 'density'],
-
                             '#FFEDA0',
                             10,
-
                             '#FED976',
                             20,
-
                             '#FEB24C',
                             50,
-
                             '#FD8D3C',
                             100,
-
                             '#FC4E2A',
                             200,
-
                             '#E31A1C',
                             500,
-
                             '#BD0026',
                             1000,
-
                             '#800026'
                         ],
                         'fill-outline-color': '#BBBBBB',
@@ -149,13 +142,12 @@
                     '0-9',
                     '10-19',
                     '20-49',
-                    '50-100',
+                    '50-99',
                     '100-199',
                     '200-499',
                     '500-999',
                     '1000 and more'
                 ];
-
                 const colors = [
                     '#FFEDA070',
                     '#FED97670',
@@ -170,6 +162,7 @@
                 const legend = document.getElementById('legend');
                 legend.innerHTML = "<b>Population Density<br>(people/sq.mi.)</b><br><br>";
 
+                
                 layers.forEach((layer, i) => {
                     const color = colors[i];
                     const item = document.createElement('div');
@@ -182,21 +175,19 @@
                     item.appendChild(key);
                     item.appendChild(value);
                     legend.appendChild(item);
-                });
+                });                     
+            });
 
-                map.on('mousemove', ({point}) => {
+
+            map.on('mousemove', ({point}) => {
                     const states = map.queryRenderedFeatures(point, {
                         layers: ['stateData-layer']
                     });
                     document.getElementById('text-escription').innerHTML = states.length ?
                         `<h3>${states[0].properties.name}</h3><p><strong><em>${states[0].properties.density}</strong> people per square mile</em></p>` :
                         `<p>Hover over a state!</p>`;
-                });
-                        
             });
-
-        };
-
+        }
         geojsonFetch();
 
 
