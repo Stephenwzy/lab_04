@@ -9,6 +9,28 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
 
     <style>
+        h2,h3 {
+            margin: 10px;
+            font-size: 18px;
+        }
+
+        h3 {
+            font-size: 16px;
+        }
+
+        p {
+            margin: 10px;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+        }
 
     
 
@@ -19,7 +41,27 @@
     <div id="map"></div>
     <div class='map-overlay' id='information'>
         <h2>Cumulative Covid cases per 10k within the county</h2>
+        <div id='text-escription'>
+            <p>Hover over a state!</p>
+        </div>
     </div>
+    <div class='map-overlay' id='legend'></div>
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoic3RlcGhlbnd6eSIsImEiOiJja3Y4b2txcW8ya24zMndtczJwa256cTdwIn0.6Asu6a19dzDDHyIqZOFE6g'
+
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style:'mapbox://styles/mapbox/light-v10',
+            zoom: 3,
+            center: [-100,40]
+        })
+
+
+
+
+    </script>
+
 
 
     
