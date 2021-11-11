@@ -3,9 +3,12 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Interactive Web Mapping</title>
+    <title>Covid Cases In Washington Counties</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
     <style>
         h2,h3 {
@@ -40,16 +43,16 @@
             border-width: 1px;
             border-color: rgba(0, 0, 0, 0.2); 
             margin-left: 20px;
-            font-family: Arial, sans-serif;
+            font-family: 'EB Garamond', serif;
             overflow: auto;
             border-radius: 3px;
         }
 
         #information{
             top: 0;
-            height: 100px;
+            height: 110px;
             margin-top: 20px;
-            width: 450px;
+            width: 480px;
         }
 
         #legend {
@@ -77,7 +80,7 @@
 <body>
     <div id="map"></div>
     <div class='map-overlay' id='information'>
-        <h2>Cumulative Covid cases per 10k within the county</h2>
+        <h2>Cumulative Covid cases per 10k within Washington counties</h2>
         <div id='text-escription'>
             <p>Hover over a county!</p>
         </div>
